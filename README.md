@@ -2,6 +2,8 @@
 
 One-page marketing site for Rooted Wellness Coaching — digital programs, 1:1 coaching, nutrition plans, and free consult booking.
 
+**Live site:** [https://oleny1.github.io/rooted-wellness/](https://oleny1.github.io/rooted-wellness/)
+
 ## Quick start
 
 ```bash
@@ -15,7 +17,7 @@ Build for production:
 npm run build
 ```
 
-Static output lands in `dist/` (portable to Netlify, Vercel, GitHub Pages, etc.).
+Static output lands in `dist/`. Pushing to `main` deploys automatically to GitHub Pages via GitHub Actions.
 
 ## Edit content without touching layout
 
