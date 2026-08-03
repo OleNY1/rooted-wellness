@@ -144,9 +144,6 @@ function renderBookingBlock() {
       <a class="btn btn--primary btn--large btn--placeholder" href="#contact">
         Booking link coming soon
       </a>
-      <p class="book__hint">
-        Scheduling isn’t connected yet. Use the contact form, or add your Calendly URL in <code>src/config.js</code>.
-      </p>
     `;
   }
 }
