@@ -263,7 +263,9 @@ function setupNav() {
 
   if (header) {
     const onScroll = () => {
-      header.classList.toggle('is-scrolled', window.scrollY > 24);
+      const scrolled = window.scrollY > 0;
+      header.classList.toggle('is-scrolled', scrolled);
+      document.body.classList.toggle('is-scrolled', scrolled);
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
