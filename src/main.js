@@ -148,37 +148,51 @@ function renderBookingBlock() {
   }
 }
 
+const socialIcons = {
+  instagram: `<svg class="social-list__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.75"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.75"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor"/></svg>`,
+  facebook: `<svg class="social-list__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v2H9v3h2v7h3v-7h2.5l.5-3H14V9z"/></svg>`,
+  tiktok: `<svg class="social-list__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M16.5 4c.4 1.7 1.6 3 3.3 3.4v2.4c-1.2 0-2.3-.3-3.3-.9v5.5c0 3.1-2.5 5.6-5.6 5.6S5.3 17.5 5.3 14.4 7.8 8.8 10.9 8.8c.3 0 .6 0 .9.1v2.6c-.3-.1-.6-.1-.9-.1-1.6 0-2.9 1.3-2.9 3s1.3 3 2.9 3 2.9-1.3 2.9-3V4h2.7z"/></svg>`,
+};
+
 function renderContact() {
-  const details = $('[data-contact-details]');
-  if (details) {
-    const items = [];
-    if (site.contact.email) {
-      items.push(
-        `<li><a href="mailto:${escapeHtml(site.contact.email)}">${escapeHtml(site.contact.email)}</a></li>`,
-      );
-    }
-    if (site.contact.phone) {
-      items.push(
-        `<li><a href="tel:${escapeHtml(site.contact.phone.replace(/\s+/g, ''))}">${escapeHtml(site.contact.phone)}</a></li>`,
-      );
-    }
-    details.innerHTML = items.join('');
+  const items = [];
+  if (site.contact.email) {
+    items.push(
+      `<li><a href="mailto:${escapeHtml(site.contact.email)}">${escapeHtml(site.contact.email)}</a></li>`,
+    );
+  }
+  if (site.contact.phone) {
+    items.push(
+      `<li><a href="tel:${escapeHtml(site.contact.phone.replace(/\s+/g, ''))}">${escapeHtml(site.contact.phone)}</a></li>`,
+    );
   }
 
+  const details = $('[data-contact-details]');
+  if (details) details.innerHTML = items.join('');
+
+  const footerContact = $('[data-footer-contact]');
+  if (footerContact) footerContact.innerHTML = items.join('');
+
   const social = $('[data-social]');
+  const socialBlock = $('[data-social-block]');
   if (social) {
-    const links = [
+    const platforms = [
       ['instagram', 'Instagram'],
       ['facebook', 'Facebook'],
       ['tiktok', 'TikTok'],
-    ]
-      .filter(([key]) => isConfiguredUrl(site.social[key]))
-      .map(
-        ([key, label]) =>
-          `<li><a href="${escapeHtml(site.social[key].trim())}" target="_blank" rel="noopener noreferrer">${label}</a></li>`,
-      );
-    social.innerHTML = links.join('');
-    social.hidden = links.length === 0;
+    ];
+
+    social.innerHTML = platforms
+      .map(([key, label]) => {
+        const icon = socialIcons[key] || '';
+        if (isConfiguredUrl(site.social[key])) {
+          return `<li><a class="social-list__link" href="${escapeHtml(site.social[key].trim())}" target="_blank" rel="noopener noreferrer" aria-label="${label}">${icon}</a></li>`;
+        }
+        return `<li><span class="social-list__soon" aria-label="${label} coming soon" title="${label} coming soon">${icon}</span></li>`;
+      })
+      .join('');
+
+    if (socialBlock) socialBlock.hidden = false;
   }
 
   const year = $('[data-year]');

@@ -26,8 +26,6 @@
     <link rel="stylesheet" href="/src/styles.css" />
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to content</a>
-
     <header class="site-header" data-header>
       <div class="site-header__inner">
         <a class="logo" href="#top" aria-label="Rooted Wellness home">
@@ -182,23 +180,40 @@
 
     <footer class="site-footer">
       <div class="site-footer__inner">
-        <div class="site-footer__brand">
-          <p class="logo logo--footer">
-            <img class="logo__mark" src="./logo.png" alt="" width="48" height="48" />
-            <span class="logo__wordmark">Rooted Wellness</span>
-          </p>
-          <p class="site-footer__tag">Fitness &amp; nutrition coaching for women.</p>
+        <div class="site-footer__top">
+          <div class="site-footer__brand">
+            <p class="logo logo--footer">
+              <img class="logo__mark" src="./logo.png" alt="" width="48" height="48" />
+              <span class="logo__wordmark">Rooted Wellness Coaching</span>
+            </p>
+            <p class="site-footer__tag">Fitness &amp; nutrition coaching for women.</p>
+          </div>
+          <div>
+            <p class="site-footer__label">Explore</p>
+            <nav class="site-footer__nav" aria-label="Footer">
+              <a href="#about">About</a>
+              <a href="#offers">Offers</a>
+              <a href="#book">Book</a>
+              <a href="#contact">Contact</a>
+            </nav>
+          </div>
+          <div class="site-footer__aside">
+            <p class="site-footer__label">Contact</p>
+            <ul class="site-footer__contact" data-footer-contact></ul>
+            <div data-social-block>
+              <p class="site-footer__label">Follow</p>
+              <ul class="social-list" data-social></ul>
+            </div>
+          </div>
         </div>
-        <nav class="site-footer__nav" aria-label="Footer">
-          <a href="#about">About</a>
-          <a href="#offers">Offers</a>
-          <a href="#book">Book</a>
-          <a href="#contact">Contact</a>
-        </nav>
-        <ul class="social-list" data-social></ul>
-        <p class="site-footer__copy">
-          <span data-year></span> Rooted Wellness Coaching. All rights reserved.
-        </p>
+        <div class="site-footer__bottom">
+          <p class="site-footer__copy">
+            <span data-year></span> Rooted Wellness Coaching. All rights reserved.
+          </p>
+          <p class="site-footer__legal">
+            <a href="#privacy">Privacy</a>
+          </p>
+        </div>
       </div>
     </footer>
 

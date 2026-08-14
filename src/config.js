@@ -22,6 +22,7 @@ export const site = {
     formEndpoint: '', // e.g. 'https://formspree.io/f/xxxxxx'
   },
 
+  // Social links — paste profile URLs here to make footer Follow links live
   social: {
     instagram: '', // e.g. 'https://instagram.com/yourhandle'
     facebook: '',

@@ -56,6 +56,8 @@ All “Book a Free Consult” buttons use this value. If empty, the site shows a
 
 Update `contact.email`, `contact.phone`, and `social.instagram` / `facebook` / `tiktok`.
 
+Footer social links only appear when those URLs are filled in. Empty values stay hidden so visitors never see broken links.
+
 ### Contact form (Formspree)
 
 1. Create a form at [formspree.io](https://formspree.io).
