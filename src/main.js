@@ -20,13 +20,16 @@ function bookingHref() {
 }
 
 function renderMeta() {
-  document.title = `${site.brand} Coaching — Fitness & Nutrition for Women`;
+  const fullBrand = site.brandFull || site.brand;
+  document.title = `${fullBrand} — Strength Training & Nutrition Coaching`;
   const desc = $('meta[name="description"]');
   if (desc) desc.setAttribute('content', site.metaDescription);
   const ogTitle = $('meta[property="og:title"]');
-  if (ogTitle) ogTitle.setAttribute('content', site.brand);
+  if (ogTitle) ogTitle.setAttribute('content', fullBrand);
   const ogDesc = $('meta[property="og:description"]');
   if (ogDesc) ogDesc.setAttribute('content', site.metaDescription);
+  const ogSite = $('meta[property="og:site_name"]');
+  if (ogSite) ogSite.setAttribute('content', fullBrand);
 }
 
 function renderCopy() {
@@ -69,19 +72,37 @@ function renderOffers() {
   const root = $('[data-offers]');
   if (!root) return;
 
+  const intro = site.offersIntro;
+  if (intro) {
+    const eyebrow = $('[data-offers-eyebrow]');
+    const heading = $('[data-offers-heading]');
+    const lede = $('[data-offers-lede]');
+    if (eyebrow) eyebrow.textContent = intro.eyebrow;
+    if (heading) heading.textContent = intro.heading;
+    if (lede) lede.textContent = intro.lede;
+  }
+
   root.innerHTML = site.offers
     .map((offer) => {
       const ready = isConfiguredUrl(offer.paymentUrl);
       const featured = offer.featured ? ' offer-card--featured' : '';
+      const badgeLabel = offer.badge || (offer.featured ? 'Most popular' : '');
+      const includes =
+        Array.isArray(offer.includes) && offer.includes.length
+          ? `<ul class="offer-card__includes">${offer.includes
+              .map((item) => `<li>${escapeHtml(item)}</li>`)
+              .join('')}</ul>`
+          : '';
       const cta = ready
         ? `<a class="btn btn--primary" href="${escapeHtml(offer.paymentUrl.trim())}" target="_blank" rel="noopener noreferrer">${escapeHtml(offer.ctaLabel)}</a>`
         : `<button class="btn btn--primary btn--disabled" type="button" disabled aria-disabled="true">${escapeHtml(offer.ctaLabel)} <span class="coming-soon">Coming soon</span></button>`;
 
       return `
         <article class="offer-card${featured} reveal" id="${escapeHtml(offer.id)}">
-          ${offer.featured ? '<p class="offer-card__badge">Most personal</p>' : ''}
+          ${badgeLabel ? `<p class="offer-card__badge">${escapeHtml(badgeLabel)}</p>` : ''}
           <h3 class="offer-card__name">${escapeHtml(offer.name)}</h3>
           <p class="offer-card__desc">${escapeHtml(offer.description)}</p>
+          ${includes}
           <p class="offer-card__price">
             <span class="offer-card__amount">${escapeHtml(offer.price)}</span>
             ${offer.priceNote ? `<span class="offer-card__note">${escapeHtml(offer.priceNote)}</span>` : ''}
@@ -91,6 +112,40 @@ function renderOffers() {
       `;
     })
     .join('');
+
+  const note = $('[data-nutrition-note]');
+  if (note && site.nutritionNote) {
+    note.textContent = site.nutritionNote;
+    note.hidden = false;
+  }
+
+  const downloads = $('[data-downloads]');
+  if (downloads) {
+    const files = Array.isArray(site.downloads) ? site.downloads : [];
+    if (!files.length) {
+      downloads.hidden = true;
+      downloads.innerHTML = '';
+    } else {
+      downloads.hidden = false;
+      downloads.innerHTML = `
+        <p class="offers__downloads-label">Download program guides</p>
+        <ul class="offers__downloads-list">
+          ${files
+            .map(
+              (file) => `
+            <li>
+              <a class="offers__download-link" href="${escapeHtml(file.href)}" download="${escapeHtml(file.filename || '')}">
+                <span class="offers__download-title">${escapeHtml(file.label)}</span>
+                ${file.description ? `<span class="offers__download-desc">${escapeHtml(file.description)}</span>` : ''}
+              </a>
+            </li>
+          `,
+            )
+            .join('')}
+        </ul>
+      `;
+    }
+  }
 }
 
 function renderTestimonials() {

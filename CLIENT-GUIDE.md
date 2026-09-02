@@ -69,6 +69,10 @@ If `formEndpoint` is empty, the form falls back to opening the visitor’s email
 
 Edit `about`, `testimonials`, and `faqs` in the same config file. Keep quote/name/detail structure for testimonials so layout stays intact.
 
+### Downloadable guides
+
+Program PDFs/DOCX files live in `public/downloads/`. Links are listed in the `downloads` array in `src/config.js`. Replace a file in that folder (same filename) or update the `href` / `filename` fields when you swap guides.
+
 ---
 
 ## Swapping in real photos / branding
