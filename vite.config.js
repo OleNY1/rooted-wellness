@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  // Custom domain (rootedwf.com) is served from the site root
-  base: '/',
+  // Required for https://OleNY1.github.io/rooted-wellness/
+  base: '/rooted-wellness/',
   root: '.',
   publicDir: 'public',
   build: {
