@@ -160,8 +160,9 @@ body.nav-open .site-header {
 
 .logo__mark {
   display: block;
-  width: 2.4rem;
-  height: 2.4rem;
+  width: 3.35rem;
+  height: auto;
+  aspect-ratio: 242 / 129;
   object-fit: contain;
   flex-shrink: 0;
 }
