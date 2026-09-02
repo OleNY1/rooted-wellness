@@ -7,7 +7,7 @@
  */
 
 export const site = {
-  brand: 'Rooted Wellness',
+  brand: 'Rooted Wellness & Fitness',
   brandFull: 'Rooted Wellness & Fitness',
   tagline: 'Get rooted. Grow stronger. Live better.',
   metaDescription:

@@ -21,7 +21,7 @@ function bookingHref() {
 
 function renderMeta() {
   const fullBrand = site.brandFull || site.brand;
-  document.title = `${fullBrand} — Strength Training & Nutrition Coaching`;
+  document.title = fullBrand;
   const desc = $('meta[name="description"]');
   if (desc) desc.setAttribute('content', site.metaDescription);
   const ogTitle = $('meta[property="og:title"]');
